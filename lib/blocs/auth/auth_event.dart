@@ -1,16 +1,47 @@
 import 'package:equatable/equatable.dart';
+import 'package:payment_app/data/models/user_model.dart';
 
-class AuthEvent extends Equatable {
+abstract class AuthEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class SignUpRequested extends AuthEvent {
-  final String email;
+class CheckAuthenticationEvent extends AuthEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class LoginUserEvent extends AuthEvent {
+  final String username;
   final String password;
 
-  SignUpRequested({required this.email, required this.password});
+  LoginUserEvent({
+    required this.username,
+    required this.password,
+  });
 
   @override
-  List<Object?> get props => [email, password];
+  List<Object?> get props => [
+        username,
+        password,
+      ];
+}
+
+class RegisterUserEvent extends AuthEvent {
+  final UserModel userModel;
+
+  RegisterUserEvent({required this.userModel});
+
+  @override
+  List<Object?> get props => [userModel];
+}
+
+class LogOutUserEvent extends AuthEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class SignInWithGoogleUserEvent extends AuthEvent {
+  @override
+  List<Object?> get props => [];
 }

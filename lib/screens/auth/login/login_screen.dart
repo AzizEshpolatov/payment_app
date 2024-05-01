@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_utils/my_utils.dart';
 import 'package:payment_app/screens/auth/login/widgets/global_button.dart';
 import 'package:payment_app/screens/auth/login/widgets/global_text_field.dart';
 import 'package:payment_app/screens/auth/login/widgets/login_global_button_news.dart';
@@ -127,55 +128,40 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 10.getHL(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ZoomTapAnimation(
-                      onTap: () {},
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        margin: EdgeInsets.symmetric(horizontal: 15.wl),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.wl, vertical: 10.hl),
-                        child: SvgPicture.asset(
-                          AppIcons.googleIcon,
-                          width: 24,
-                        ),
-                      ),
+                ZoomTapAnimation(
+                  onTap: () {},
+                  child: Container(
+                    width: widthLogin,
+                    margin: EdgeInsets.symmetric(horizontal: 12.wl),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(22.wl),
+                      color: Colors.grey,
                     ),
-                    ZoomTapAnimation(
-                      onTap: () {},
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
+                    child: Row(
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          margin: EdgeInsets.symmetric(horizontal: 15.wl),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.wl, vertical: 13.hl),
+                          child: SvgPicture.asset(
+                            AppIcons.googleIcon,
+                            width: 24,
+                          ),
                         ),
-                        margin: EdgeInsets.symmetric(horizontal: 15.wl),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.wl, vertical: 10.hl),
-                        child: SvgPicture.asset(
-                          AppIcons.iphoneIcon,
-                          width: 24,
+                        10.getWL(),
+                        Text(
+                          "Google",
+                          style: TextStyle(
+                            fontSize: 16.wl,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                    ZoomTapAnimation(
-                      onTap: () {},
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        margin: EdgeInsets.symmetric(horizontal: 15.wl),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.wl, vertical: 10.hl),
-                        child: SvgPicture.asset(
-                          AppIcons.facebookIcon,
-                          width: 24,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
                 20.getHL(),
                 GlobalButtonNews(

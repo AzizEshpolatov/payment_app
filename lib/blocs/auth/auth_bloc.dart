@@ -1,12 +1,35 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/blocs/auth/auth_event.dart';
 import 'package:payment_app/blocs/auth/auth_state.dart';
+import 'package:payment_app/data/models/form_status.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc() : super(AuthInitial()) {
-    on<AuthEvent>((event, emit) {});
+  AuthBloc()
+      : super(
+          const AuthState(
+            statusMessage: '',
+            formStatus: FormStatus.pure,
+            errorMessage: '',
+          ),
+        ) {
+    on<CheckAuthenticationEvent>(_checkAuthentication);
+    on<LoginUserEvent>(_loginUser);
+    on<RegisterUserEvent>(_registerUser);
+    on<LogOutUserEvent>(_logOutUser);
+    on<SignInWithGoogleUserEvent>(_googleSignIn);
   }
+
+  _checkAuthentication(CheckAuthenticationEvent event, emit) {}
+
+  _loginUser(LoginUserEvent event, emit) {}
+
+  _registerUser(RegisterUserEvent event, emit) {}
+
+  _logOutUser(LogOutUserEvent event, emit) {}
+
+  _googleSignIn(SignInWithGoogleUserEvent event, emit) {}
 }
+
 // Future<void> signInWithGoogle(BuildContext context,
 //     [String? clientId]) async {
 //   // Trigger the authentication flow

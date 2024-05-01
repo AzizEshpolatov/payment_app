@@ -3,7 +3,6 @@ import 'package:my_utils/my_utils.dart';
 import 'package:payment_app/screens/on_boarding/pages/page_one/page_one.dart';
 import 'package:payment_app/screens/on_boarding/pages/page_three/page_three.dart';
 import 'package:payment_app/screens/on_boarding/pages/page_two/page_two.dart';
-import 'package:payment_app/screens/on_boarding/pages/widgets/global_buttons.dart';
 import '../../data/local/storage_repo.dart';
 import '../routes.dart';
 
@@ -24,42 +23,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const SizedBox(height: 50),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 22.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GlobalButtons(
-                  title: "BACK",
-                  voidCallback: () {
-                    if (activeIndex > 0) {
-                      activeIndex -= 1;
-                      controller.animateToPage(
-                        activeIndex,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.linear,
-                      );
-                    }
-                  },
-                ),
-                GlobalButtons(
-                  title: "SKIP",
-                  voidCallback: () {
-                    StorageRepository.setBool(
-                      key: "is_new_user",
-                      value: true,
-                    ).then(
-                      (value) {
-                        Navigator.pushReplacementNamed(
-                            context, RouteNames.loginRoute);
-                      },
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
           Expanded(
             child: PageView(
               controller: controller,
