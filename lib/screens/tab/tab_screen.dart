@@ -10,6 +10,18 @@ class TabScreen extends StatefulWidget {
 class _TabScreenState extends State<TabScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "TabBox",
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+      ),
+    );
   }
 }

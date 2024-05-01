@@ -3,6 +3,7 @@ import 'package:my_utils/my_utils.dart';
 import 'package:payment_app/screens/on_boarding/pages/page_one/page_one.dart';
 import 'package:payment_app/screens/on_boarding/pages/page_three/page_three.dart';
 import 'package:payment_app/screens/on_boarding/pages/page_two/page_two.dart';
+import 'package:payment_app/utils/size/login_screen_size.dart';
 import '../../data/local/storage_repo.dart';
 import '../routes.dart';
 
@@ -23,6 +24,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
+          SizedBox(height: 50.hl),
           Expanded(
             child: PageView(
               controller: controller,
@@ -59,8 +61,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               }
             },
             child: Container(
-              width: width,
-              padding: EdgeInsets.symmetric(vertical: 15.h),
+              width: width,height: 55,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(13.w),
                 color: Colors.blue,
