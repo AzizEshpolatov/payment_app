@@ -131,14 +131,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                         SizedBox(height: 10.hl),
-                        Text(
-                          "Phone number: ${state.userModel.phoneNumber}",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 18.wl,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
                         150.getHL(),
                         InkWell(onTap: (){
                           Navigator.pushNamed(context,RouteNames.securityRoute);
