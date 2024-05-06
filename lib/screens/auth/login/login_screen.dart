@@ -9,6 +9,7 @@ import 'package:payment_app/screens/auth/login/widgets/global_button.dart';
 import 'package:payment_app/screens/auth/login/widgets/global_text_field.dart';
 import 'package:payment_app/screens/auth/login/widgets/login_button.dart';
 import 'package:payment_app/screens/auth/login/widgets/login_global_button_news.dart';
+import '../../../blocs/user_profile/user_profile_bloc.dart';
 import '../../../utils/app_icon/app_icons.dart';
 import '../../../utils/app_img/app_img.dart';
 import '../../../utils/colors/app_colors.dart';
@@ -163,9 +164,18 @@ class _LoginScreenState extends State<LoginScreen> {
               );
             }
             if (state.formStatus == FormStatus.authenticated) {
+              if (state.statusMessage == "registered") {
+                BlocProvider.of<UserProfileBloc>(context)
+                    .add(AddUserEvent(state.userModel));
+              } else {
+                BlocProvider.of<UserProfileBloc>(context).add(
+                  GetCurrentUserEvent(state.userModel.authUid),
+                );
+              }
+
               Navigator.pushNamedAndRemoveUntil(
                 context,
-                RouteNames.tabRoute,
+                RouteNames.setPinRoute,
                 (route) => false,
               );
             }

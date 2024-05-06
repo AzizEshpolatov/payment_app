@@ -22,62 +22,67 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          SizedBox(height: 50.hl),
-          Expanded(
-            child: PageView(
-              controller: controller,
-              onPageChanged: (index) {},
-              physics: const NeverScrollableScrollPhysics(),
-              children: const [
-                BoardingPageOne(),
-                BoardingPageTwo(),
-                BoardingPageThree(),
-              ],
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              if (activeIndex == 2) {
-                StorageRepository.setBool(
-                  key: "is_new_user",
-                  value: true,
-                ).then(
-                  (value) {
-                    Navigator.pushReplacementNamed(
-                      context,
-                      RouteNames.loginRoute,
-                    );
-                  },
-                );
-              } else {
-                activeIndex += 1;
-                controller.animateToPage(
-                  activeIndex,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.linear,
-                );
-              }
-            },
-            child: Container(
-              width: width,height: 55,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(13.w),
-                color: Colors.blue,
+      body: Padding(
+        padding:EdgeInsets.symmetric(horizontal: 20.wl),
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView(
+                controller: controller,
+                onPageChanged: (index) {},
+                physics: const NeverScrollableScrollPhysics(),
+                children: const [
+                  BoardingPageOne(),
+                  BoardingPageTwo(),
+                  BoardingPageThree(),
+                ],
               ),
-              child: Center(
-                child: Text(
-                  "Next page",
-                  style: TextStyle(
-                    fontSize: 17.w,
-                    color: Colors.white,
+            ),
+            GestureDetector(
+              onTap: () {
+                if (activeIndex == 2) {
+                  StorageRepository.setBool(
+                    key: "is_new_user",
+                    value: true,
+                  ).then(
+                        (value) {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        RouteNames.loginRoute,
+                      );
+                    },
+                  );
+                } else {
+                  activeIndex += 1;
+                  controller.animateToPage(
+                    activeIndex,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.linear,
+                  );
+                }
+              },
+              child: Container(
+                width: double.infinity,
+                height: 60,
+                margin: EdgeInsets.symmetric(horizontal: 20.wl, vertical: 20.hl),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(13.w),
+                  color: Colors.blue,
+                ),
+                child: Center(
+                  child: Text(
+                    "Next page",
+                    style: TextStyle(
+                      fontSize: 17.w,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
-          )
-        ],
+            20.getHL(),
+          ],
+        ),
       ),
     );
   }

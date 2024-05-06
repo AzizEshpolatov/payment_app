@@ -12,7 +12,20 @@
           "package_name": "uz.najot.pay"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "468885042469-5q32ag7odflqhnh72st3ghkfs3a2nhge.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.najot.pay",
+            "certificate_hash": "39f141fbc6054626898ff04f439b207025495941"
+          }
+        },
+        {
+          "client_id": "468885042469-qj3eojt29959e1fq2or1qgde7fupsgg3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBgetkfl6jo9zZCvharyvi9INTLelcfbs0"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468885042469-eqhsvobjfne0np6puik84p881apjjgc3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "468885042469-4t8eeskd2auhndmcr9jkr0psq8eibgoj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "paymentapp.pay.paymentApp"
+              }
+            }
+          ]
         }
       }
     }

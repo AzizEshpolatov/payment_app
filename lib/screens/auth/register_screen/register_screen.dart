@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/blocs/auth/auth_bloc.dart';
 import 'package:payment_app/blocs/auth/auth_event.dart';
 import 'package:payment_app/blocs/auth/auth_state.dart';
+import 'package:payment_app/blocs/user_profile/user_profile_bloc.dart';
 import 'package:payment_app/data/models/user_model.dart';
 import 'package:payment_app/screens/auth/register_screen/widgets/global_button.dart';
 import 'package:payment_app/screens/auth/register_screen/widgets/global_text_field.dart';
@@ -126,11 +127,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       password: passwordController.text,
                                       userId: "",
                                       imageUrl: '',
+                                      authUid: '',
                                       phoneNumber: passwordController.text,
                                       email: emailController.text,
+                                      fcm: '',
                                     ),
                                   ),
                                 );
+                            Navigator.pushNamed(context, RouteNames.setPinRoute);
                           },
                           text: "Sign Up",
                         ),
@@ -156,6 +160,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               );
             }
             if (state.formStatus == FormStatus.authenticated) {
+              if (state.statusMessage == "registered") {
+                BlocProvider.of<UserProfileBloc>(context).add(
+                  AddUserEvent(state.userModel),
+                );
+              }
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 RouteNames.tabRoute,
