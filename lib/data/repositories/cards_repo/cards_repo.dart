@@ -35,7 +35,7 @@ class CardRepository {
 
   Future<NetworkResponse> deleteCard(String docId) async {
     try {
-      await FirebaseFirestore.instance.collection('cards').doc(docId).delete();
+      await FirebaseFirestore.instance.collection('Cards').doc(docId).delete();
 
       return NetworkResponse(data: "success");
     } on FirebaseException catch (error) {

@@ -16,6 +16,7 @@ class AppColors {
   static const Color c406AD8 = Color(0xFF406AD8);
   static const Color cC0C0C0 = Color(0xFFC0C0C0);
   static const Color c_C4C4C4= Color(0xFFC4C4C4);
+  static const Color cA788FD= Color(0xFFA788FD);
   static const splashScreenBackground = Color.fromARGB(255, 95, 37, 3);
   static const splashWelcome = Colors.white;
   static const loginAccountColor = Colors.white;

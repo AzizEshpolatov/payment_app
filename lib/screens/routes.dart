@@ -7,6 +7,7 @@ import 'package:payment_app/screens/local_auth/method_two/touch_id_screen.dart';
 import 'package:payment_app/screens/payment/payment.dart';
 import 'package:payment_app/screens/security/security_screen.dart';
 import 'package:payment_app/screens/splash/splash_screen.dart';
+import 'package:payment_app/screens/tab/cart/add_cards.dart';
 import 'package:payment_app/screens/tab/profile/update_user.dart';
 import 'package:payment_app/screens/tab/tab_screen.dart';
 import 'package:payment_app/screens/transfer/transfer_screen.dart';
@@ -61,6 +62,9 @@ class AppRoutes {
       case RouteNames.securityRoute:
         return navigate(const SecurityScreen());
 
+      case RouteNames.addCards:
+        return navigate(const AddCards());
+
       default:
         return navigate(
           const Scaffold(
@@ -92,4 +96,5 @@ class RouteNames {
   static const String touchIdRoute = "/touchId_route";
   static const String updateUser = "/update_user";
   static const String securityRoute = "/security";
+  static const String addCards = "/addCard";
 }

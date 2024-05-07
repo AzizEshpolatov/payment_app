@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/data/models/form_status.dart';
 import 'package:payment_app/data/models/network_response.dart';
@@ -31,7 +30,8 @@ class CardsBloc extends Bloc<CardsEvent, CardsState> {
     NetworkResponse response = await cardRepository.addCard(event.cardModel);
 
     if (response.errorText.isEmpty) {
-      emit(state.copyWith(formStatus: FormStatus.success));
+      emit(state.copyWith(
+          formStatus: FormStatus.success, statusMessage: "added"));
     } else {
       emit(state.copyWith(
         errorMessage: response.errorText,
@@ -66,25 +66,42 @@ class CardsBloc extends Bloc<CardsEvent, CardsState> {
     }
   }
 
-  _listenCard(GetCardsByUserIdEvent event, emit) async {
-    await emit.onEach(
-      cardRepository.getCardsByUserId(event.userId),
-      onData: (List<CardModel> userCards) {
-        debugPrint(
-            "================= user cards ============== ${userCards.length}");
-        emit(state.copyWith(userCards: userCards));
-      },
-    );
+  _listenCard(GetCardsByUserIdEvent event, Emitter emit) async {
+    await emit.onEach(cardRepository.getCardsByUserId(event.userId),
+        onData: (List<CardModel> userCards) {
+      emit(state.copyWith(userCards: userCards));
+    });
   }
 
-  _listenCardDatabase(GetCardsDatabaseEvent event, emit) async {
-    debugPrint("===================Database===============");
-    await emit.onEach(
-      cardRepository.getCardsDatabase(),
-      onData: (List<CardModel> db) {
-        debugPrint("================= DB ============== ${db.length}");
-        emit(state.copyWith(userCardsDB: db));
-      },
-    );
+  _listenCardDatabase(GetCardsDatabaseEvent event, Emitter emit) async {
+    await emit.onEach(cardRepository.getCardsDatabase(),
+        onData: (List<CardModel> cards) {
+      emit(state.copyWith(userCardsDB: cards));
+    });
   }
+
+// _listenCard(GetCardsByUserIdEvent event, emit) async {
+//   await emit.onEach(
+//     cardRepository.getCardsByUserId(event.userId),
+//     debugPrint(
+//         "===================== USER ID ============= [${event.userId}]"),
+//     onData: (List<CardModel> userCards) {
+//       debugPrint(
+//           "================= user cards ============== ${userCards.length}");
+//       emit(state.copyWith(userCards: userCards));
+//     },
+//   );
+// }
+//
+// _listenCardDatabase(GetCardsDatabaseEvent event, emit) async {
+//   debugPrint("===================Database===============");
+//   await emit.onEach(
+//     cardRepository.getCardsDatabase(),
+//     onData: (dynamic data) {
+//       final db = data as List<CardModel>;
+//       debugPrint("================= DB ============== ${db.length}");
+//       emit(state.copyWith(userCardsDB: db));
+//     },
+//   );
+// }
 }
