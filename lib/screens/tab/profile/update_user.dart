@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/utils/size/login_screen_size.dart';
 import '../../../blocs/user_profile/user_profile_bloc.dart';
 import '../../../data/models/user_model.dart';
+import '../../../utils/constants/app_constants.dart';
 import 'global_button.dart';
 import 'global_text_form_field.dart';
 
@@ -114,13 +115,4 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
 
     super.dispose();
   }
-}
-
-class AppConstants {
-  static RegExp emailRegExp = RegExp(
-      r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$');
-  static RegExp passwordRegExp =
-  RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$');
-  static RegExp textRegExp = RegExp("[a-zA-Z]");
-  static RegExp phoneRegExp = RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)');
 }

@@ -7,7 +7,6 @@ import 'package:payment_app/data/models/card_model.dart';
 import 'package:payment_app/screens/tab/cart/widgets/global_text_field.dart';
 import 'package:payment_app/utils/size/login_screen_size.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
-
 import '../../../blocs/user_profile/user_profile_bloc.dart';
 import '../profile/global_button.dart';
 
@@ -27,6 +26,9 @@ class _AddCardsState extends State<AddCards> {
 
   @override
   Widget build(BuildContext context) {
+    heightLogin = MediaQuery.of(context).size.height;
+    widthLogin = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -44,6 +46,7 @@ class _AddCardsState extends State<AddCards> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                20.getHL(),
                 GlobalTextFormField(
                   labelText: 'card number',
                   prefixIconPath:
@@ -92,75 +95,6 @@ class _AddCardsState extends State<AddCards> {
                   ],
                 ),
                 const Spacer(),
-                // ZoomTapAnimation(
-                //   onTap: () {
-                //     List<CardModel> db = state.userCardsDB;
-                //     List<CardModel> myCards = state.userCards;
-                //     bool isExist = false;
-                //     bool hasInDb = false;
-                //
-                //     for (var element in myCards) {
-                //       if (element.cardNumber == cardNumber.text) {
-                //         isExist = true;
-                //         break;
-                //       }
-                //     }
-                //
-                //     for (var i in db) {
-                //       if (i.cardNumber == cardNumber.text) {
-                //         hasInDb = true;
-                //         break;
-                //       }
-                //     }
-                //
-                //     if ((!isExist) && hasInDb == false) {
-                //       context.read<CardsBloc>().add(
-                //             AddCardEvent(
-                //               CardModel(
-                //                 cardHolder: '',
-                //                 cardNumber: cardNumber.text,
-                //                 expireDate: expireDate.text,
-                //                 userId: '',
-                //                 type: 1,
-                //                 cardId: '',
-                //                 icon: '',
-                //                 cvc: cvc.text,
-                //                 color: cardColor,
-                //                 isMain: false,
-                //                 balance: 0.0,
-                //                 bank: '',
-                //               ),
-                //             ),
-                //           );
-                //     } else {
-                //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                //           content: Text(
-                //         "Karta bazada mavjud emas yoki allaqachon qoshilgan",
-                //         style: TextStyle(
-                //           fontSize: 18.wl,
-                //           color: Colors.black,
-                //         ),
-                //       )));
-                //     }
-                //   },
-                //   child: Container(
-                //     width: widthLogin,
-                //     padding: EdgeInsets.symmetric(vertical: 12.hl),
-                //     decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(12.wl),
-                //       color: Colors.blue,
-                //     ),
-                //     child: Center(
-                //       child: Text(
-                //         "Save Cards",
-                //         style: TextStyle(
-                //           fontSize: 18.wl,
-                //           color: Colors.black,
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 SaveButton(
                   onTab: () {
                     if (cardNumber.text.length == 16 &&

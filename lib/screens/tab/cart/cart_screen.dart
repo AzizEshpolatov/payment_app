@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:payment_app/blocs/cards/cards_bloc.dart';
-import 'package:payment_app/blocs/cards/cards_event.dart';
 import 'package:payment_app/blocs/cards/cards_state.dart';
-import 'package:payment_app/blocs/user_profile/user_profile_bloc.dart';
-import 'package:payment_app/screens/routes.dart';
-import 'package:payment_app/screens/tab/cart/widgets/global_buttons.dart';
-import 'package:payment_app/utils/colors/app_colors.dart';
-import 'package:payment_app/utils/size/login_screen_size.dart';
+import 'package:payment_app/screens/tab/cart/add_cards.dart';
+import 'package:payment_app/screens/tab/cart/widgets/row_items.dart';
+import 'package:payment_app/utils/size/size.dart';
 
-double wd = 0;
+import '../../../blocs/cards/cards_event.dart';
+import '../../../blocs/user_profile/user_profile_bloc.dart';
+import '../../../utils/app_img/app_img.dart';
+import '../../../utils/colors/app_colors.dart';
+import '../../transaction/transaction_screen.dart';
 
 class CardScreen extends StatefulWidget {
   const CardScreen({super.key});
@@ -21,230 +23,240 @@ class CardScreen extends StatefulWidget {
 class _CardScreenState extends State<CardScreen> {
   @override
   void initState() {
-    debugPrint(
-        '---------- ${context.read<UserProfileBloc>().state.userModel.userId} -----------');
-
-    Future.microtask(() => {
-          context.read<CardsBloc>().add(GetCardsByUserIdEvent(
-              userId: context.read<UserProfileBloc>().state.userModel.userId)),
-          context.read<CardsBloc>().add(GetCardsDatabaseEvent()),
-        });
-
+    context.read<CardsBloc>().add(GetCardsByUserIdEvent(
+        userId: context.read<UserProfileBloc>().state.userModel.userId));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    wd = MediaQuery.of(context).size.width;
-    debugPrint('=========== $wd ============');
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: AppBar(
-        title: Text(
-          "Bank Banktut",
-          style: TextStyle(
-            fontSize: 18.wl,
-            color: Colors.black,
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, RouteNames.addCards);
-            },
-            icon: const Icon(Icons.add, color: Colors.black),
-          ),
-        ],
-      ),
+      backgroundColor: const Color(0xFF121433),
       body: BlocBuilder<CardsBloc, CardsState>(
         builder: (context, state) {
-          if (state.userCards.isEmpty) {
-            return Center(
-                child: Icon(Icons.insert_emoticon_sharp, size: 150.wl));
-          }
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              20.getHL(),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(
-                    state.userCards.length,
-                    (index) => Container(
-                      margin: EdgeInsets.symmetric(
-                          horizontal: 15.wl, vertical: 8.hl),
-                      width: 280.wl,
-                      padding: EdgeInsets.symmetric(
-                          vertical: 15.hl, horizontal: 15.wl),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.wl),
-                        color: state.userCards[index].color != ''
-                            ? Color(int.parse(
-                                "0xff${state.userCards[index].color}"))
-                            : Colors.blue,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 4.wl,
-                            color: Colors.black.withOpacity(.8),
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          state.userCards[index].type == 1
-                              ? Image.network(
-                                  "https://humocard.uz/upload/medialibrary/208/8x0p9hi3h9jww0flwdm92dayhn0flulj/humo-logo-more.png",
-                                  fit: BoxFit.cover,
-                                  width: 40.wl,
-                                  height: 30.hl,
-                                )
-                              : const SizedBox(),
-                          10.getHL(),
-                          Text(
-                            state.userCards[index].cardNumber,
-                            style: TextStyle(
-                              fontSize: 18.wl,
-                              color: Colors.white,
-                            ),
-                          ),
-                          10.getHL(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
+          return SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                84.getH(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  child: Text(
+                    "Your Card",
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 20.w,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                24.getH(),
+                SizedBox(
+                  height: 200.h,
+                  child: PageView(
+                    children: [
+                      ...List.generate(
+                        state.userCards.length,
+                        (index) => Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 24.w),
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(16),
+                            onLongPress: () {
+                              context.read<CardsBloc>().add(DeleteCardEvent(
+                                  state.userCards[index].cardId));
+                            },
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const TransactionScreen(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 15.w, vertical: 10.h),
+                              height: 100,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                color: Color(
+                                  int.parse(
+                                      "0xFF${state.userCards[index].color}"),
+                                ),
+                              ),
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Name",
+                                    "VISA",
                                     style: TextStyle(
-                                      fontSize: 12.wl,
-                                      color: Colors.white,
+                                      color: AppColors.white,
+                                      fontSize: 36.w,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                   Text(
-                                    state.userCards[index].cardHolder,
+                                    "Platinum",
                                     style: TextStyle(
-                                      fontSize: 18.wl,
                                       color: Colors.white,
+                                      fontSize: 18.w,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Text(
+                                    state.userCards[index].cardNumber,
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                      fontSize: 24.w,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ],
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    "Valid Till",
-                                    style: TextStyle(
-                                      fontSize: 12.wl,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    state.userCards[index].expireDate,
-                                    style: TextStyle(
-                                      fontSize: 18.wl,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                            ),
                           ),
-                        ],
+                        ),
                       ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 24.w),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AddCards(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 15.w,
+                              vertical: 10.h,
+                            ),
+                            height: 100,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: AppColors.white,
+                            ),
+                            child: const Icon(
+                              Icons.add,
+                              size: 128,
+                              color: Color(0xFF121433),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                40.getH(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      RowItems(
+                        title: "Sent",
+                        icon: AppImages.arrowTop,
+                        onTap: () {},
+                      ),
+                      RowItems(
+                        title: "Receive",
+                        icon: AppImages.arrowBottom,
+                        onTap: () {},
+                      ),
+                      RowItems(
+                        title: "Topup",
+                        icon: AppImages.topup,
+                        onTap: () {},
+                      ),
+                      RowItems(
+                        title: "Payment",
+                        icon: AppImages.payment,
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                ),
+                22.getH(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Recent Activities",
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 20.w,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: SvgPicture.asset(AppImages.arrowRight),
+                      ),
+                    ],
+                  ),
+                ),
+                24.getH(),
+                ListTile(
+                  onTap: () {},
+                  leading: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 11.w,
+                      vertical: 11.h,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 11.w,
+                        vertical: 11.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF23265A),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: SvgPicture.asset(AppImages.listtile),
+                    ),
+                  ),
+                  title: Text(
+                    "Food",
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 16.w,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  subtitle: Text(
+                    "15 Oct 2020",
+                    style: TextStyle(
+                      color: const Color(0xFFD9D9D9),
+                      fontSize: 8.w,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  trailing: Text(
+                    "- \$ 40,00",
+                    style: TextStyle(
+                      color: const Color(0xFFC7C7C7),
+                      fontSize: 16.w,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                 ),
-              ),
-              10.getHL(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ...List.generate(
-                    state.userCards.length,
-                    (index) => Container(
-                      height: 8.hl,
-                      width: 8.wl,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              10.getHL(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.wl),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GlobalButtons(
-                      icons: const Icon(
-                        Icons.arrow_upward,
-                        color: Colors.red,
-                        size: 30,
-                      ),
-                      voidCallback: () {},
-                      title: 'Sent',
-                    ),
-                    GlobalButtons(
-                      icons: const Icon(
-                        Icons.arrow_downward_rounded,
-                        color: Colors.green,
-                        size: 30,
-                      ),
-                      voidCallback: () {},
-                      title: 'Receive',
-                    ),
-                    GlobalButtons(
-                      icons: const Icon(
-                        Icons.forward_5,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                      voidCallback: () {},
-                      title: 'Top up',
-                    ),
-                    GlobalButtons(
-                      icons: const Icon(
-                        Icons.qr_code,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                      voidCallback: () {},
-                      title: 'Payment',
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 7.wl),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "  Recent Activities",
-                      style: TextStyle(
-                        fontSize: 22.wl,
-                        color: Colors.black,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),

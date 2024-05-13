@@ -10,7 +10,7 @@ import 'package:payment_app/screens/splash/splash_screen.dart';
 import 'package:payment_app/screens/tab/cart/add_cards.dart';
 import 'package:payment_app/screens/tab/profile/update_user.dart';
 import 'package:payment_app/screens/tab/tab_screen.dart';
-import 'package:payment_app/screens/transfer/transfer_screen.dart';
+import 'package:payment_app/screens/transaction/transaction_screen.dart';
 import '../data/models/user_model.dart';
 import 'auth/register_screen/register_screen.dart';
 import 'no_internet/no_internet_screen.dart';
@@ -30,7 +30,7 @@ class AppRoutes {
             onInternetComeBack: settings.arguments as VoidCallback));
 
       case RouteNames.transferRoute:
-        return navigate(const TransferScreen());
+        return navigate(const TransactionScreen());
 
       case RouteNames.paymentRoute:
         return navigate(const PaymentScreen());

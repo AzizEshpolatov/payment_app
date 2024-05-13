@@ -8,6 +8,7 @@ class CardsState extends Equatable {
   final FormStatus formStatus;
   final List<CardModel> userCards;
   final List<CardModel> userCardsDB;
+  final List<CardModel> activeCards;
 
   const CardsState({
     required this.statusMessage,
@@ -15,6 +16,7 @@ class CardsState extends Equatable {
     required this.formStatus,
     required this.userCards,
     required this.userCardsDB,
+    required this.activeCards,
   });
 
   CardsState copyWith({
@@ -23,6 +25,7 @@ class CardsState extends Equatable {
     FormStatus? formStatus,
     List<CardModel>? userCards,
     List<CardModel>? userCardsDB,
+    List<CardModel>? activeCards,
   }) {
     return CardsState(
       statusMessage: statusMessage ?? this.statusMessage,
@@ -30,6 +33,7 @@ class CardsState extends Equatable {
       formStatus: formStatus ?? this.formStatus,
       userCards: userCards ?? this.userCards,
       userCardsDB: userCardsDB ?? this.userCardsDB,
+      activeCards: activeCards ?? this.activeCards,
     );
   }
 
@@ -40,5 +44,6 @@ class CardsState extends Equatable {
         formStatus,
         userCards,
         userCardsDB,
+        activeCards,
       ];
 }

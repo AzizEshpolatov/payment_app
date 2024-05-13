@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static const Color c_1317DD = Color(0xFF1317DD);
   static const Color black = Colors.black;
   static const Color white = Colors.white;
   static const Color transparent = Colors.transparent;
@@ -17,6 +18,13 @@ class AppColors {
   static const Color cC0C0C0 = Color(0xFFC0C0C0);
   static const Color c_C4C4C4= Color(0xFFC4C4C4);
   static const Color cA788FD= Color(0xFFA788FD);
+  static const Color c_262626 = Color(0xFF262626);
+  static const Color c_151940 = Color(0xFF151940);
+  static const Color c_7A7AFE = Color(0xFF7A7AFE);
+  static const Color c_5771F9 = Color(0xFF5771F9);
+  static const Color c_7F8192 = Color(0xFF7F8192);
+  static const Color c_F5F6FA = Color(0xFFF5F6FA);
+  static const Color c_304FFE = Color(0xFF304FFE);
   static const splashScreenBackground = Color.fromARGB(255, 95, 37, 3);
   static const splashWelcome = Colors.white;
   static const loginAccountColor = Colors.white;

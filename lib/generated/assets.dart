@@ -2,23 +2,43 @@
 class Assets {
   Assets._();
 
+  static const String iconsArrowBottom = 'assets/icons/arrow_bottom.svg';
+  static const String iconsArrowRight = 'assets/icons/arrow_right.svg';
+  static const String iconsArrowTop = 'assets/icons/arrow_top.svg';
+  static const String iconsBe = 'assets/icons/be.svg';
+  static const String iconsBill = 'assets/icons/bill.svg';
   static const String iconsCartIcon = 'assets/icons/cart_icon.svg';
+  static const String iconsEmail = 'assets/icons/email.svg';
+  static const String iconsEye = 'assets/icons/eye.svg';
   static const String iconsEyeIcon = 'assets/icons/eye_icon.svg';
   static const String iconsFacebookIcon = 'assets/icons/facebook_icon.svg';
   static const String iconsFavouriteIcon = 'assets/icons/favourite_icon.svg';
+  static const String iconsGoogle = 'assets/icons/google.svg';
   static const String iconsGoogleIcon = 'assets/icons/google_icon.svg';
   static const String iconsHomeIcon = 'assets/icons/home_icon.svg';
   static const String iconsIphoneIcon = 'assets/icons/iphone_icon.svg';
+  static const String iconsListtile = 'assets/icons/listtile.svg';
   static const String iconsLockIcon = 'assets/icons/lock_icon.svg';
   static const String iconsMessageIcon = 'assets/icons/message_icon.svg';
   static const String iconsMikraphoneIcon = 'assets/icons/mikraphone_icon.svg';
+  static const String iconsPassword = 'assets/icons/password.svg';
+  static const String iconsPayment = 'assets/icons/payment.svg';
   static const String iconsPersonIcon = 'assets/icons/person_icon.svg';
   static const String iconsSearchIcon = 'assets/icons/search_icon.svg';
+  static const String iconsSent = 'assets/icons/sent.svg';
+  static const String iconsShopping = 'assets/icons/shopping.svg';
+  static const String iconsTopup = 'assets/icons/topup.svg';
+  static const String iconsTransfer = 'assets/icons/transfer.svg';
+  static const String iconsVaucher = 'assets/icons/vaucher.svg';
+  static const String imagesChip = 'assets/images/chip.png';
+  static const String imagesHumo = 'assets/images/humo.png';
   static const String imagesImg = 'assets/images/img.png';
   static const String imagesImg1 = 'assets/images/img_1.png';
   static const String imagesImg2 = 'assets/images/img_2.png';
   static const String imagesLoginImg = 'assets/images/login_img.png';
   static const String imagesRegisterImg = 'assets/images/register_img.png';
+  static const String imagesUzcard = 'assets/images/uzcard.png';
+  static const String imagesVisa = 'assets/images/visa.png';
   static const String lottieLoginLottie = 'assets/lottie/login_lottie.json';
   static const String lottieSplashLottie = 'assets/lottie/splash_lottie.json';
 

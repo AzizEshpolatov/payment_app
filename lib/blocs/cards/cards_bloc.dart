@@ -15,11 +15,13 @@ class CardsBloc extends Bloc<CardsEvent, CardsState> {
             formStatus: FormStatus.pure,
             userCards: [],
             userCardsDB: [],
+              activeCards: [],
           ),
         ) {
     on<AddCardEvent>(_addCard);
     on<UpdateCardEvent>(_updateCard);
     on<DeleteCardEvent>(_deleteCard);
+    on<GetActiveCards>(_listenActiveCard);
     on<GetCardsByUserIdEvent>(_listenCard);
     on<GetCardsDatabaseEvent>(_listenCardDatabase);
   }
@@ -71,6 +73,15 @@ class CardsBloc extends Bloc<CardsEvent, CardsState> {
         onData: (List<CardModel> userCards) {
       emit(state.copyWith(userCards: userCards));
     });
+  }
+
+  _listenActiveCard(GetActiveCards event, Emitter emit) async {
+    await emit.onEach(
+      cardRepository.getActiveCards(),
+      onData: (List<CardModel> activeCards) {
+        emit(state.copyWith(activeCards: activeCards));
+      },
+    );
   }
 
   _listenCardDatabase(GetCardsDatabaseEvent event, Emitter emit) async {

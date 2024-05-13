@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:payment_app/screens/routes.dart';
 import 'package:payment_app/screens/tab/cart/cart_screen.dart';
 import 'package:payment_app/screens/tab/history/history_screen.dart';
 import 'package:payment_app/screens/tab/home/home_screen.dart';
@@ -70,6 +71,13 @@ class _TabBoxState extends State<TabScreen> {
             label: "Profile",
           ),
         ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, RouteNames.transferRoute);
+        },
+        child: const Icon(Icons.forward_5),
       ),
     );
   }

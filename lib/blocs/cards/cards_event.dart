@@ -29,6 +29,10 @@ class DeleteCardEvent extends CardsEvent {
   @override
   List<Object?> get props => [cardDocId];
 }
+class GetActiveCards extends CardsEvent {
+  @override
+  List<Object?> get props => [];
+}
 
 class GetCardsByUserIdEvent extends CardsEvent {
   GetCardsByUserIdEvent({required this.userId});
